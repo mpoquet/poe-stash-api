@@ -33,7 +33,7 @@ def fetch_tab(league, realm, account_name, poe_sessid, tab_index):
         'POESESSID': poe_sessid,
     }
     headers = {
-        'user-agent': 'poe-tab-fetcher/0.1.0 just a script to retrieve my tabs for prophecy analysis'
+        'user-agent': 'poe-stash-api/0.1.0 simple python functions to retrieve PoE stash info'
     }
 
     response = requests.post(url, data=data, cookies=cookies, headers=headers).text
