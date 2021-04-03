@@ -3,8 +3,8 @@ import os
 import pandas
 import numpy as np
 
-import stash
-import price
+import poe_stash_api.stash as stash
+import poe_stash_api.price as price
 
 league='Ritual'
 realm='pc'

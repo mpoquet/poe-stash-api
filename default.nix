@@ -2,15 +2,27 @@
 }:
 
 let self = rec {
-  python-shell = pkgs.mkShell rec {
-    name = "python-shell";
-    buildInputs = [
-      pkgs.python3
-      pkgs.python3Packages.plotly
-      pkgs.python3Packages.pandas
-    ] ++ [
-      pkgs.python3Packages.pylint
-      pkgs.python3Packages.ipython
+  pythonPackages = pkgs.python3Packages;
+
+  poe-stash-api = pythonPackages.buildPythonPackage {
+    name = "poe-stash-api-0.1.0";
+    propagatedBuildInputs = with pythonPackages; [
+      requests
+      pandas
+    ];
+    src = pkgs.lib.sourceByRegex ./. [
+      "^setup\.py"
+      "^poe_stash_api"
+      "^poe_stash_api/.*\.py"
+    ];
+  };
+
+  test-py-shell = pkgs.mkShell rec {
+    name = "test-py-shell";
+    buildInputs = with pythonPackages; [
+      poe-stash-api
+      pylint
+      ipython
     ];
   };
 
