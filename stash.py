@@ -32,8 +32,11 @@ def fetch_tab(league, realm, account_name, poe_sessid, tab_index):
     cookies = {
         'POESESSID': poe_sessid,
     }
+    headers = {
+        'user-agent': 'poe-tab-fetcher/0.1.0 just a script to retrieve my tabs for prophecy analysis'
+    }
 
-    response = requests.post(url, data=data, cookies=cookies).text
+    response = requests.post(url, data=data, cookies=cookies, headers=headers).text
     parsed = json.loads(response)
     if 'error' in parsed:
         if parsed['error']['code'] == 6:
@@ -82,5 +85,16 @@ def tabs_to_df(tabs):
         for item in tab['items']:
             if 'stackSize' in item:
                 stackable[item['typeLine']] += item['stackSize']
+
+    return pandas.DataFrame(stackable.items(), columns=['item', 'count'])
+
+def prophecies_tabs_to_df(tabs):
+    """Convert JSON tabs into usable data frames"""
+    stackable = defaultdict(int)
+
+    for tab in tabs:
+        for item in tab['items']:
+            if 'typeLine' in item:
+                stackable[item['typeLine']] += 1
 
     return pandas.DataFrame(stackable.items(), columns=['item', 'count'])
