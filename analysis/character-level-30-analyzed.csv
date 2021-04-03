@@ -1,0 +1,88 @@
+item,count,seal_cost,tier,total_sc_cost,probability,probability_percent_lab
+The Mysterious Gift,60,1,meh,120,0.034722222222222224,34.72 ‰
+The Plaguemaw I,58,1,chain,116,0.03356481481481482,33.56 ‰
+The Unbreathing Queen I,51,5,chain,306,0.029513888888888888,29.51 ‰
+The Hardened Armour,51,3,craft,204,0.029513888888888888,29.51 ‰
+Defiled in the Sceptre,51,3,crap,204,0.029513888888888888,29.51 ‰
+In the Grasp of Corruption,45,3,crap,180,0.026041666666666668,26.04 ‰
+Unnatural Energy,45,3,crap,180,0.026041666666666668,26.04 ‰
+Holding the Bridge,45,3,crap,180,0.026041666666666668,26.04 ‰
+Golden Touch,43,3,craft,172,0.02488425925925926,24.88 ‰
+Unbearable Whispers I,43,5,chain,258,0.02488425925925926,24.88 ‰
+Hunter's Lesson,42,3,meh,168,0.024305555555555556,24.31 ‰
+The Feral Lord I,39,5,chain,234,0.022569444444444444,22.57 ‰
+Lasting Impressions,39,3,meh,156,0.022569444444444444,22.57 ‰
+The Sharpened Blade,38,3,craft,152,0.02199074074074074,21.99 ‰
+Overflowing Riches,37,3,good,148,0.02141203703703704,21.41 ‰
+The Alchemist,37,3,meh,148,0.02141203703703704,21.41 ‰
+The God of Misfortune,35,3,meh,140,0.02025462962962963,20.25 ‰
+Beyond Sight I,34,4,chain,170,0.019675925925925927,19.68 ‰
+Gilded Within,33,3,meh,132,0.019097222222222224,19.10 ‰
+Plague of Rats,32,2,good,96,0.018518518518518517,18.52 ‰
+Forceful Exorcism,32,1,crap,64,0.018518518518518517,18.52 ‰
+Hidden Vaal Pathways,31,2,meh,93,0.017939814814814815,17.94 ‰
+Ending the Torment,31,3,crap,124,0.017939814814814815,17.94 ‰
+The Twins,31,2,meh,93,0.017939814814814815,17.94 ‰
+The Wealthy Exile,30,1,crap,60,0.017361111111111112,17.36 ‰
+Risen Blood,27,3,crap,108,0.015625,15.62 ‰
+Waiting in Ambush,27,2,crap,81,0.015625,15.62 ‰
+The Brothers of Necromancy,27,2,crap,81,0.015625,15.62 ‰
+Erased from Memory,27,3,meh,108,0.015625,15.62 ‰
+Rebirth,26,2,meh,78,0.015046296296296295,15.05 ‰
+Touched by the Wind,26,3,craft,104,0.015046296296296295,15.05 ‰
+Possessed Foe,26,2,crap,78,0.015046296296296295,15.05 ‰
+Twice Enchanted,25,1,good,50,0.014467592592592593,14.47 ‰
+Hidden Reinforcements,24,1,meh,48,0.013888888888888888,13.89 ‰
+Kalandra's Craft,24,3,good,96,0.013888888888888888,13.89 ‰
+The Corrupt,23,1,meh,46,0.013310185185185185,13.31 ‰
+Day of Sacrifice I,23,4,chain,115,0.013310185185185185,13.31 ‰
+An Unseen Peril,22,2,meh,66,0.01273148148148148,12.73 ‰
+The Hungering Swarm,21,2,crap,63,0.012152777777777778,12.15 ‰
+"Soil, Worms and Blood",21,2,crap,63,0.012152777777777778,12.15 ‰
+The Undead Brutes,21,2,crap,63,0.012152777777777778,12.15 ‰
+The Scout,18,1,crap,36,0.010416666666666666,10.42 ‰
+The Cursed Choir,18,2,meh,54,0.010416666666666666,10.42 ‰
+Plague of Frogs,18,2,good,54,0.010416666666666666,10.42 ‰
+The Invader,16,2,crap,48,0.009259259259259259,9.26 ‰
+Vaal Invasion,16,3,crap,64,0.009259259259259259,9.26 ‰
+Reforged Bonds,16,2,meh,48,0.009259259259259259,9.26 ‰
+Crushing Squall,15,2,good,45,0.008680555555555556,8.68 ‰
+The Trembling Earth,14,2,crap,42,0.008101851851851851,8.10 ‰
+The Warmongers I,14,4,chain,70,0.008101851851851851,8.10 ‰
+The Singular Spirit,13,1,meh,26,0.007523148148148148,7.52 ‰
+The Undead Storm,12,2,good,36,0.006944444444444444,6.94 ‰
+Ice from Above,12,2,good,36,0.006944444444444444,6.94 ‰
+The Ambitious Bandit I,11,4,chain,55,0.00636574074074074,6.37 ‰
+Lightning Falls,10,2,good,30,0.005787037037037037,5.79 ‰
+Deadly Rivalry I,9,4,chain,45,0.005208333333333333,5.21 ‰
+Erasmus' Gift,9,1,meh,18,0.005208333333333333,5.21 ‰
+Fire from the Sky,8,2,good,24,0.004629629629629629,4.63 ‰
+Thaumaturgical History I,7,4,chain,35,0.004050925925925926,4.05 ‰
+The Prison Guard,6,2,crap,18,0.003472222222222222,3.47 ‰
+A Master Seeks Help,6,2,good,18,0.003472222222222222,3.47 ‰
+The Lady in Black,6,2,crap,18,0.003472222222222222,3.47 ‰
+Roth's Legacy,5,2,crap,15,0.0028935185185185184,2.89 ‰
+From Death Springs Life,5,2,crap,15,0.0028935185185185184,2.89 ‰
+Vaal Winds,5,2,good,15,0.0028935185185185184,2.89 ‰
+Fear's Wide Reach,5,2,crap,15,0.0028935185185185184,2.89 ‰
+Against the Tide,5,2,crap,15,0.0028935185185185184,2.89 ‰
+The Prison Key,5,2,crap,15,0.0028935185185185184,2.89 ‰
+Nature's Resilience,4,1,good,8,0.0023148148148148147,2.31 ‰
+Ancient Doom,4,1,good,8,0.0023148148148148147,2.31 ‰
+Storm on the Horizon,4,2,crap,12,0.0023148148148148147,2.31 ‰
+Cleanser of Sins,3,2,good,9,0.001736111111111111,1.74 ‰
+A Firm Foothold,3,2,crap,9,0.001736111111111111,1.74 ‰
+The Ward's Ward,3,2,crap,9,0.001736111111111111,1.74 ‰
+Trapped in the Tower,2,1,meh,4,0.0011574074074074073,1.16 ‰
+Graceful Flames,2,2,crap,6,0.0011574074074074073,1.16 ‰
+Baptism by Death,2,2,crap,6,0.0011574074074074073,1.16 ‰
+Fire and Brimstone,2,1,good,4,0.0011574074074074073,1.16 ‰
+The Petrified,2,2,crap,6,0.0011574074074074073,1.16 ‰
+The Eagle's Cry,2,2,crap,6,0.0011574074074074073,1.16 ‰
+The Silverwood,2,1,good,4,0.0011574074074074073,1.16 ‰
+The Snuffed Flame,1,1,meh,2,5.787037037037037e-4,0.58 ‰
+The Soulless Beast,1,2,good,3,5.787037037037037e-4,0.58 ‰
+The Vanguard,1,2,crap,3,5.787037037037037e-4,0.58 ‰
+Custodians of Silence,1,2,crap,3,5.787037037037037e-4,0.58 ‰
+The Brutal Enforcer,1,2,crap,3,5.787037037037037e-4,0.58 ‰
+The Servant's Heart,1,1,good,2,5.787037037037037e-4,0.58 ‰
