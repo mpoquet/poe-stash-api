@@ -18,6 +18,9 @@ class ResourceNotFoundFTException(FetchTabException):
 class RateLimitExceededFTException(FetchTabException):
     pass
 
+class HTTPErrorFTException(FetchTabException):
+    pass
+
 
 def fetch_tab(league, realm, account_name, poe_sessid, tab_index):
     """Fetch a single tab from GGG's API"""
@@ -36,7 +39,11 @@ def fetch_tab(league, realm, account_name, poe_sessid, tab_index):
         'user-agent': 'poe-stash-api/0.1.0 simple python functions to retrieve PoE stash info'
     }
 
-    response = requests.post(url, data=data, cookies=cookies, headers=headers).text
+    r = requests.post(url, data=data, cookies=cookies, headers=headers)
+    if not r.ok:
+        raise HTTPErrorFTException(f'Got HTTP status {r.status_code}: {r.reason}')
+
+    response = r.text
     parsed = json.loads(response)
     if 'error' in parsed:
         if parsed['error']['code'] == 6:
