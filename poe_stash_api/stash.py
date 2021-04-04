@@ -41,7 +41,10 @@ def fetch_tab(league, realm, account_name, poe_sessid, tab_index):
 
     r = requests.post(url, data=data, cookies=cookies, headers=headers)
     if not r.ok:
-        raise HTTPErrorFTException(f'Got HTTP status {r.status_code}: {r.reason}')
+        error_text = f'Got HTTP status {r.status_code}: {r.reason}'
+        if r.status_code == 404:
+            raise ResourceNotFoundFTException(error_text)
+        raise HTTPErrorFTException(error_text)
 
     response = r.text
     parsed = json.loads(response)
