@@ -1,22 +1,22 @@
 item,tier
 The Mysterious Gift,meh
-The Plaguemaw I,chain
-The Unbreathing Queen I,chain
-The Hardened Armour,craft
+The Plaguemaw I,meh
+The Unbreathing Queen I,meh
+The Hardened Armour,crap
 Defiled in the Sceptre,crap
 In the Grasp of Corruption,crap
 Unnatural Energy,crap
 Holding the Bridge,crap
-Golden Touch,craft
-Unbearable Whispers I,chain
+Golden Touch,crap
+Unbearable Whispers I,meh
 Hunter's Lesson,meh
-The Feral Lord I,chain
+The Feral Lord I,meh
 Lasting Impressions,meh
-The Sharpened Blade,craft
+The Sharpened Blade,crap
 Overflowing Riches,good
 The Alchemist,meh
 The God of Misfortune,meh
-Beyond Sight I,chain
+Beyond Sight I,meh
 Gilded Within,meh
 Plague of Rats,good
 Forceful Exorcism,crap
@@ -29,13 +29,13 @@ Waiting in Ambush,crap
 The Brothers of Necromancy,crap
 Erased from Memory,meh
 Rebirth,meh
-Touched by the Wind,craft
+Touched by the Wind,crap
 Possessed Foe,crap
 Twice Enchanted,good
-Hidden Reinforcements,meh
+Hidden Reinforcements,good
 Kalandra's Craft,good
 The Corrupt,meh
-Day of Sacrifice I,chain
+Day of Sacrifice I,meh
 An Unseen Peril,meh
 The Hungering Swarm,crap
 "Soil, Worms and Blood",crap
@@ -48,16 +48,16 @@ Vaal Invasion,crap
 Reforged Bonds,meh
 Crushing Squall,good
 The Trembling Earth,crap
-The Warmongers I,chain
+The Warmongers I,meh
 The Singular Spirit,meh
 The Undead Storm,good
 Ice from Above,good
-The Ambitious Bandit I,chain
+The Ambitious Bandit I,meh
 Lightning Falls,good
-Deadly Rivalry I,chain
+Deadly Rivalry I,meh
 Erasmus' Gift,meh
 Fire from the Sky,good
-Thaumaturgical History I,chain
+Thaumaturgical History I,meh
 The Prison Guard,crap
 A Master Seeks Help,good
 The Lady in Black,crap
@@ -86,3 +86,6 @@ The Vanguard,crap
 Custodians of Silence,crap
 The Brutal Enforcer,crap
 The Servant's Heart,good
+Living Fires,crap
+Path of Betrayal,crap
+Visions of the Drowned,crap

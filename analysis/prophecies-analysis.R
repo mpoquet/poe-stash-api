@@ -2,134 +2,108 @@
 library(tidyverse)
 library(viridis)
 library(treemap)
+library(tidytext)
 
 theme_set(theme_bw())
 
-raw_data = read_csv('character-level-30.csv', comment='#')
+raw_data1 = read_csv('character-level-1.csv', comment='#')
+raw_data1b = read_csv('character-level-1-block.csv', comment='#')
+raw_data30 = read_csv('character-level-30.csv', comment='#')
 seal_cost = read_csv('prophecies-seal-cost.csv', comment='#')
 tiers = read_csv('prophecies-tiers.csv', comment='#')
 
-data = inner_join(raw_data, inner_join(seal_cost, tiers))
-total_nb_prophecies = sum(data$count)
+nb_prophecies_per_method = sum(raw_data1$count)
+stopifnot(sum(raw_data1b$count) == nb_prophecies_per_method)
+stopifnot(sum(raw_data30$count) == nb_prophecies_per_method)
 
-data = data %>% mutate(
-  total_sc_cost = count * (seal_cost+1),
-  probability = count / total_nb_prophecies,
+full_data = inner_join(
+  full_join(
+    full_join(
+      raw_data1 %>% transmute(item=item, "level 1 no blocking"=count),
+      raw_data1b %>% transmute(item=item, "level 1 blocking"=count),
+    ),
+      raw_data30 %>% transmute(item=item, "level 30 no blocking"=count)
+  ) %>% replace(is.na(.), 0),
+  inner_join(tiers, seal_cost)
+)
+write_csv(full_data, '/tmp/prophecies-data.csv')
+
+longer_data = pivot_longer(full_data, cols=2:4,
+  names_to="method",
+  values_to="count"
+) %>% filter(count>0) %>% mutate(
+  total_silver_cost = count * (seal_cost+1),
+  proba = count / nb_prophecies_per_method
 ) %>% mutate(
-  probability_percent_lab = sprintf("%02.2f ‰", probability*1000)
+  stderr=sqrt((proba*(1-proba))/nb_prophecies_per_method)
 )
-nb_silver_coins_used = sum(data$total_sc_cost)
 
-write_csv(data, "./analyzed-data.csv")
-
-# raw visualization
-ggplot(data, aes(x=reorder(item, count), y=count, fill=tier)) +
+ggplot(longer_data,
+    aes(x=reorder_within(item, proba, method), y=proba, fill=tier)) +
   geom_bar(stat = "identity") +
+  geom_errorbar(aes(ymin=proba-1.96*stderr, ymax=proba+1.96*stderr), width=0.5) +
   coord_flip() +
-  scale_y_continuous(expand=c(0.01,0.01)) +
-  scale_fill_viridis(discrete=TRUE) +
-  labs(y="Number of prophecies") +
+  scale_x_reordered() +
+  scale_y_continuous(expand=c(0.001,0.001), labels=scales::percent,
+    breaks=seq(from=0,to=0.1, by=0.02)
+  ) +
+  scale_fill_viridis(discrete=TRUE, begin=0.2) +
+  facet_grid(rows=vars(method), scales="free", space="free") +
+  labs(y="Probability of occurrence") +
   theme(
     legend.direction = "horizontal",
-    legend.position = c(0.7,0.1),
+    legend.position = c(0.8,0.025),
     legend.title = element_blank(),
     axis.title.y = element_blank(),
     axis.text = element_text(size=8),
-    panel.grid.major.x = element_blank(),
     legend.background = element_blank(),
     legend.box.background = element_rect(color="black"),
   ) +
-  ggsave('/tmp/prophecies-count-barchart.png', width=8, height=16)
+  ggsave('/tmp/prophecies-probability-barchart.png', width=8, height=16)
 
-# sealing cost of each prophecy
-ggplot(data, aes(x=reorder(item, count), y=seal_cost, fill=tier)) +
-  geom_bar(stat = "identity") +
+ggplot(longer_data %>% filter(method=="level 1 no blocking"),
+    aes(x=reorder_within(item, total_silver_cost, method), y=total_silver_cost, fill=tier)) +
+  geom_bar(stat = "identity", show.legend=FALSE) +
   coord_flip() +
+  scale_x_reordered() +
   scale_y_continuous(expand=c(0.01,0.01)) +
-  scale_fill_viridis(discrete=TRUE) +
-  labs(y="Sealing cost") +
+  scale_fill_viridis(discrete=TRUE, begin=0.2) +
+  facet_grid(rows=vars(method), scales="free", space="free") +
+  labs(y="Total amount of silver coins used") +
   theme(
-    legend.direction = "horizontal",
-    legend.position = c(0.75,0.1),
-    legend.title = element_blank(),
     axis.title.y = element_blank(),
     axis.text = element_text(size=8),
-    panel.grid.major.x = element_blank(),
     legend.background = element_blank(),
     legend.box.background = element_rect(color="black"),
   ) +
-  ggsave('/tmp/prophecies-sealcost-barchart.png', width=8, height=4)
+  ggsave('/tmp/prophecies-silver-waste-lvl1-barchart.png', width=8, height=4)
 
-# treemap
-png(filename="/tmp/prophecies-count-treemap.png", width=2400, height=1200)
-treemap(data,
-  index = c("tier","item"),
-  vSize = "count",
-  type = "index",
-  fontsize.labels = c(48,36),
-  palette = viridis_pal()(4),
-  border.col = c("white","white"),
-  border.lwds = c(21,6),
-  align.labels = list(
-    c("left", "top"),
-    c("center", "center")
-  ),
-  title = "Prophecies distribution. Area is proportional to number of prophecies.",
-  fontsize.title=60,
+
+silver_cost_per_method = longer_data %>%
+  group_by(method) %>%
+  summarize(method_cost=sum(total_silver_cost))
+
+silver_cost_per_methodtier = longer_data %>%
+  group_by(method, tier) %>%
+  summarize(methodtier_cost=sum(total_silver_cost))
+
+silver_cost = inner_join(
+  silver_cost_per_method,
+  silver_cost_per_methodtier
+) %>% mutate(
+  fraction_cost=methodtier_cost/method_cost
+) %>% mutate(
+  stderr=sqrt((fraction_cost*(1-fraction_cost))/method_cost)
 )
-dev.off()
 
-# treemap with probabilities
-png(filename="/tmp/prophecies-count-treemap-labels-proba.png", width=2400, height=1200)
-treemap(data %>% mutate(label=paste(item, probability_percent_lab, sep="\n")),
-  index = c("tier","label"),
-  vSize = "count",
-  type = "index",
-  fontsize.labels = c(48,36),
-  palette = c("#a6cee3", "#1f78b4", "#b2df8a", "#33a02c"),
-  border.col = c("black","white"),
-  border.lwds = c(21,6),
-  align.labels = list(
-    c("left", "top"),
-    c("center", "center")
-  ),
-  title = "Prophecies distribution. Area is proportional to number of prophecies.",
-  fontsize.title=60,
-)
-dev.off()
-
-# which ones to block?
-data %>% ggplot(aes(x=reorder(item, total_sc_cost), y=total_sc_cost, fill=tier)) +
-  geom_bar(stat = "identity") +
-  coord_flip() +
-  scale_y_continuous(expand=c(0.01,0.01)) +
-  scale_fill_viridis(discrete=TRUE) +
-  labs(y="Total amount of silver coins used") +
+silver_cost %>% ggplot(aes(x=tier, y=fraction_cost, fill=tier)) +
+  geom_bar(stat="identity", show.legend=FALSE) +
+  geom_errorbar(aes(ymin=fraction_cost-1.96*stderr, ymax=fraction_cost+1.96*stderr), width=0.5) +
+  scale_fill_viridis(discrete=TRUE, begin=0.2) +
+  scale_y_continuous(labels=scales::percent) +
+  facet_wrap(vars(method)) +
+  labs(y="Proportion of silver coins spent") +
   theme(
-    legend.direction = "horizontal",
-    legend.position = c(0.7,0.1),
-    legend.title = element_blank(),
-    axis.title.y = element_blank(),
-    panel.grid.major.x = element_blank(),
-    legend.background = element_blank(),
-    legend.box.background = element_rect(color="black"),
+    axis.title.x = element_blank()
   ) +
-  ggsave('/tmp/prophecies-cost-barchart.png', width=8, height=4)
-
-palette_without_good = viridis_pal()(4)[-1]
-data %>% filter(tier != "good") %>% ggplot(aes(x=reorder(item, total_sc_cost), y=total_sc_cost, fill=tier)) +
-  geom_bar(stat = "identity") +
-  coord_flip() +
-  scale_y_continuous(expand=c(0.01,0.01)) +
-  scale_fill_manual(values=palette_without_good) +
-  labs(y="Total amount of silver coins used") +
-  theme(
-    legend.direction = "horizontal",
-    legend.position = c(0.7,0.1),
-    legend.title = element_blank(),
-    axis.title.y = element_blank(),
-    panel.grid.major.x = element_blank(),
-    legend.background = element_blank(),
-    legend.box.background = element_rect(color="black"),
-  ) +
-  ggsave('/tmp/prophecies-waste-barchart.png', width=8, height=4)
+  ggsave('/tmp/prophecies-silver-cost.png', width=8, height=4)

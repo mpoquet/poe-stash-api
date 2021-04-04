@@ -33,6 +33,7 @@ let self = rec {
       pkgs.rPackages.tidyverse
       pkgs.rPackages.viridis
       pkgs.rPackages.treemap
+      pkgs.rPackages.tidytext
     ];
   };
 };
