@@ -9,7 +9,3 @@ Note: This code has no special ambition, it started as an example to fetch GGG A
 
 ## Usage
 Give a look to the `examples` directory.
-
-## Known issues
-
-- Some divination cards and prophecies have the same name (`The Twins`, `Rebirth`...), which creates issues when joining item data with poe.ninja price information.

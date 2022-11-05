@@ -97,14 +97,3 @@ def tabs_to_df(tabs):
                 stackable[item['typeLine']] += item['stackSize']
 
     return pandas.DataFrame(stackable.items(), columns=['item', 'count'])
-
-def prophecies_tabs_to_df(tabs):
-    """Convert JSON tabs into usable data frames"""
-    stackable = defaultdict(int)
-
-    for tab in tabs:
-        for item in tab['items']:
-            if 'typeLine' in item:
-                stackable[item['typeLine']] += 1
-
-    return pandas.DataFrame(stackable.items(), columns=['item', 'count'])

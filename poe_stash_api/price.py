@@ -32,7 +32,6 @@ def fetch_items(league):
     items['Resonator'] = requests.get(f'{url}?league={league}&type=Resonator').json()
     items['Essence'] = requests.get(f'{url}?league={league}&type=Essence').json()
     items['DivinationCard'] = requests.get(f'{url}?league={league}&type=DivinationCard').json()
-    items['Prophecy'] = requests.get(f'{url}?league={league}&type=Prophecy').json()
     return items
 
 def items_to_df(items):

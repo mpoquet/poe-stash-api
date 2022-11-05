@@ -6,12 +6,13 @@ import numpy as np
 import poe_stash_api.stash as stash
 import poe_stash_api.price as price
 
-league='Ritual'
-realm='pc'
+league = 'Ritual'
+realm = 'pc'
+poeaccount = os.getenv('POEACCOUNT')
+poesessid = os.getenv('POESESSID')
 
-tabs = stash.fetch_all_tabs(league, realm, os.getenv('POEACCOUNT'), os.getenv('POESESSID'))
-prophecies_tabs = tabs[-3:]
-tabs_df = stash.prophecies_tabs_to_df(prophecies_tabs)
+tabs = stash.fetch_all_tabs(league, realm, poeaccount, poesessid)
+tabs_df = stash.items_to_df(tabs)
 tabs_df.sort_values(by=['count'], ascending=False).to_csv('./raw-data.csv', index=False, quoting=csv.QUOTE_NONNUMERIC)
 
 currencies = price.fetch_currencies(league)
@@ -26,14 +27,3 @@ joined_df = pandas.merge(tabs_df, price_df, how='inner')
 joined_df['chaos_total'] = joined_df['chaos_unity'] * joined_df['count']
 joined_df['count_log'] = np.log(joined_df['count'])
 joined_df.sort_values(by=['chaos_total'], ascending=False).to_csv('./joined-data.csv', index=False, quoting=csv.QUOTE_NONNUMERIC)
-
-# color_scale='Blues'
-# fig = px.treemap(joined_df,
-#     path=['family', 'item'],
-#     hover_data=['item', 'count', 'chaos_unity'],
-#     values='chaos_total',
-#     color='count_log',
-#     color_continuous_scale=color_scale
-# )
-
-# fig.write_html("/tmp/plotly.html")
